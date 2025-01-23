@@ -54,6 +54,44 @@
     button:focus {
       outline: none;
     }
+
+    /* Modal styles */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal-content {
+      background-color: white;
+      padding: 20px;
+      border-radius: 5px;
+      text-align: center;
+      color: black;
+      width: 80%;
+      max-width: 400px;
+    }
+
+    .modal-button {
+      padding: 10px 20px;
+      font-size: 18px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 10px;
+      background-color: #007bff;
+      color: #fff;
+    }
+
+    button:focus {
+      outline: none;
+    }
   </style>
 
   <!-- Firebase SDK -->
@@ -89,14 +127,27 @@
         time: malaysiaTime
       })
         .then(() => {
-          // Different alert messages based on answer
+          // Show custom modal with different messages based on answer
+          const modal = document.querySelector('.modal');
+          const modalMessage = document.querySelector('.modal-message');
+          const modalButton = document.querySelector('.modal-button');
+          
           if (answer === 'fine') {
-            alert("Good, I'm happy for you.");
-            window.location.href = "page2.html";  // Go to the second page
+            modalMessage.textContent = "Good, I'm happy for you.";
+            modalButton.textContent = "Proceed";
           } else if (answer === 'not well') {
-            alert("It's okay, tomorrow will be a better day for you!");
-            window.location.href = "page2.html";  // Go to the second page
+            modalMessage.textContent = "It's okay, tomorrow will be a better day for you!";
+            modalButton.textContent = "Proceed";
           }
+
+          // Show the modal
+          modal.style.display = 'flex';
+
+          // Event listener for modal button
+          modalButton.addEventListener('click', () => {
+            modal.style.display = 'none'; // Close the modal
+            window.location.href = "page2.html";  // Go to the second page
+          });
         })
         .catch((error) => {
           console.error("Error saving data:", error);
@@ -113,6 +164,14 @@
   <div class="button-container">
     <button class="fine-button">I'm totally fine.</button>
     <button class="bad-button">Honestly, not too well.</button>
+  </div>
+
+  <!-- Custom Modal for both buttons -->
+  <div class="modal">
+    <div class="modal-content">
+      <h2 class="modal-message">Loading...</h2>
+      <button class="modal-button">OK</button> <!-- OK button for the modal -->
+    </div>
   </div>
 </body>
 </html>
