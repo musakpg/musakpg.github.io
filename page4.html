@@ -63,7 +63,7 @@
 
     <!-- Input text will appear if user selects "lainii" -->
     <div class="input-container" id="inputContainer">
-      <input type="text" id="otherGameInput" placeholder="Ha nak main apa :p" required>
+      <input type="text" id="otherGameInput" placeholder="Ha nak main apa :p">
     </div>
 
     <!-- Submit button -->
@@ -94,6 +94,12 @@
       const selectedGame = document.getElementById('gameDropdown').value;
       const otherGameInput = document.getElementById('otherGameInput').value;
       const timestamp = Date.now(); // Unique ID for each entry
+
+      // Check if 'lainii' is selected and the input is empty
+      if (selectedGame === 'lainii' && !otherGameInput.trim()) {
+        alert("Please specify the game name.");
+        return; // Stop form submission
+      }
 
       // Create a reference for saving data in Firebase
       const dataRef = ref(db, 'gameChoices/' + timestamp);
