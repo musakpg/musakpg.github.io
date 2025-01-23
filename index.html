@@ -55,47 +55,57 @@
       outline: none;
     }
   </style>
-  <!-- Firebase SDK -->
-  <script src="https://www.gstatic.com/firebasejs/11.2.0/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/11.2.0/firebase-database.js"></script>
-</head>
-<body>
-  <h1>How are you today?</h1>
-  <div class="button-container">
-    <button class="fine-button" onclick="submitAnswer('fine')">I'm totally fine.</button>
-    <button class="bad-button" onclick="submitAnswer('not well')">Honestly, not too well.</button>
-  </div>
 
-  <script>
-    // Firebase configuration
+  <!-- Firebase SDK -->
+  <script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-app.js";
+    import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-database.js";
+
+    // Your web app's Firebase configuration
     const firebaseConfig = {
       apiKey: "AIzaSyD5Bm4MwiumTO_mBZHd4bGBxrHfJaQeEbA",
       authDomain: "githubio-1354f.firebaseapp.com",
-      databaseURL: "https://githubio-1354f-default-rtdb.asia-southeast1.firebasedatabase.app/",
+      databaseURL: "https://githubio-1354f-default-rtdb.asia-southeast1.firebasedatabase.app",
       projectId: "githubio-1354f",
-      storageBucket: "githubio-1354f",
+      storageBucket: "githubio-1354f.appspot.com",
       messagingSenderId: "432730844775",
       appId: "1:432730844775:web:d9306c5eb20ad1d3aaeec2"
     };
 
     // Initialize Firebase
-    const app = firebase.initializeApp(firebaseConfig);
-    const db = firebase.database();
+    const app = initializeApp(firebaseConfig);
 
-    // Function to submit answer
+    // Initialize Realtime Database
+    const db = getDatabase(app);
+
+    // Function to submit answer to Firebase
     function submitAnswer(answer) {
       const timestamp = Date.now(); // Unique ID for each entry
-      firebase.database().ref('answers/' + timestamp).set({
+      const dataRef = ref(db, 'answers/' + timestamp);
+
+      set(dataRef, {
         answer: answer,
         time: new Date().toISOString()
       })
-      .then(() => {
-        alert("Your response has been recorded!");
-      })
-      .catch((error) => {
-        console.error("Error saving data:", error);
-      });
+        .then(() => {
+          alert("Your response has been recorded!");
+        })
+        .catch((error) => {
+          console.error("Error saving data:", error);
+        });
     }
+
+    // Event listeners for button clicks
+    document.querySelector('.fine-button').addEventListener('click', () => submitAnswer('fine'));
+    document.querySelector('.bad-button').addEventListener('click', () => submitAnswer('not well'));
   </script>
+</head>
+<body>
+  <h1>How are you today?</h1>
+  <div class="button-container">
+    <button class="fine-button">I'm totally fine.</button>
+    <button class="bad-button">Honestly, not too well.</button>
+  </div>
 </body>
 </html>
