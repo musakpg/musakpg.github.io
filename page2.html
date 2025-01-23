@@ -152,10 +152,6 @@
       // Disable the modal button (OK button)
       modalButton.disabled = true;
 
-      // Optional: You can enable the button again after some timeout or user interaction
-      setTimeout(() => {
-        modalButton.disabled = false; // Enable OK button after timeout (e.g., 5 seconds)
-      }, 5000); // After 5 seconds, enable the button
     });
 
     // Event listener for the modal button (OK button)
@@ -176,7 +172,8 @@
   <div class="modal">
     <div class="modal-content">
       <h2>Are you sure? :)</h2>
-      <button class="modal-button" disabled>OK</button>
+      <button class="modal-button" disabled>YES</button>
+      <button class="modal-button" >NO</button>
     </div>
   </div>
 </body>
