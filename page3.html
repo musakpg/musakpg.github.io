@@ -337,25 +337,7 @@
   </style>
 
   <script type="module">
-    // Counter to track how many times the user clicks the "Yee" button
-    let yeeClickCount = 0;
-
-    // Event listener for the "Yee" button
-    document.querySelector('.modal-button').addEventListener('click', () => {
-      yeeClickCount++;
-
-      // Show notification on each click
-      if (yeeClickCount < 3) {
-        alert("Tekan banyak ii untuk confirm");
-      }
-
-      // After 3 clicks, show the alert and close the window
-      if (yeeClickCount >= 3) {
-        alert("Oh takpela sorry kacau.");
-        window.close();
-      }
-    });
-
+    
     // Firebase setup
     import { initializeApp } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-app.js";
     import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-database.js";
@@ -394,8 +376,10 @@
             modal.style.display = 'flex';
             modalButton.disabled = false;
           } else if (answer === 'taknak') {
+   
             const modal = document.querySelector('.modal-dont-know');
             modal.style.display = 'flex';
+           
           }
         })
         .catch((error) => {
@@ -403,6 +387,7 @@
         });
     }
 
+    
     // Event listener for the "Nak!!" button
     document.querySelector('.nak-button').addEventListener('click', () => submitAnswer('nak'));
 
@@ -416,11 +401,22 @@
       window.location.href = "page4.html";  // Go to the third page
     });
 
-    // Event listener for the modal "NO" button
-    document.querySelector('.modal-button-no').addEventListener('click', () => {
+    document.querySelector('.modal-dont-know').addEventListener('click', () => {
       const modal = document.querySelector('.modal-dont-know');
-      modal.style.display = 'none'; // Close the modal
+       let yeeClickCount = 0;
+        
+            // Event listener for the "Yee" button
+            document.querySelector('.modal-button').addEventListener('click', () => {
+              yeeClickCount++;
+              
+              // After 3 clicks, show the alert and close the window
+              if (yeeClickCount >= 3) {
+                alert("Oh takpela sorry kacau.");
+                window.close();
+              }
+            });
     });
+    
   </script>
 </head>
 <body>
