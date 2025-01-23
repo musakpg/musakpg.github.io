@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Question Page 4</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background-color: #28a745; /* Green background */
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+
+    .dropdown-container {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    select, input {
+      padding: 10px;
+      font-size: 18px;
+      border: none;
+      border-radius: 5px;
+      width: 80%;
+      max-width: 300px;
+    }
+
+    /* Hide the input field initially */
+    .input-container {
+      display: none;
+      margin-top: 10px;
+    }
+
+    button:focus {
+      outline: none;
+    }
+  </style>
+</head>
+<body>
+  <h1>Nak main apa?</h1>
+  
+  <div class="dropdown-container">
+    <select id="gameDropdown">
+      <option value="valor">Valor</option>
+      <option value="emyel">Emyel</option>
+      <option value="pubg">PUBG</option>
+      <option value="lainii">Lain ii</option>
+    </select>
+
+    <!-- Input text will appear if user selects "lain ii" -->
+    <div class="input-container" id="inputContainer">
+      <input type="text" id="otherGameInput" placeholder="Sila taip apa yang nak main...">
+    </div>
+
+    <!-- Submit button -->
+    <button id="submitButton">Submit</button>
+  </div>
+
+  <!-- Firebase SDK -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-app.js";
+    import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-database.js";
+
+    // Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyD5Bm4MwiumTO_mBZHd4bGBxrHfJaQeEbA",
+      authDomain: "githubio-1354f.firebaseapp.com",
+      databaseURL: "https://githubio-1354f-default-rtdb.asia-southeast1.firebasedatabase.app",
+      projectId: "githubio-1354f",
+      storageBucket: "githubio-1354f.appspot.com",
+      messagingSenderId: "432730844775",
+      appId: "1:432730844775:web:d9306c5eb20ad1d3aaeec2"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+
+    // Function to submit the selected game and input text to Firebase
+    function submitGameChoice() {
+      const selectedGame = document.getElementById('gameDropdown').value;
+      const otherGameInput = document.getElementById('otherGameInput').value;
+      const timestamp = Date.now(); // Unique ID for each entry
+
+      // Create a reference for saving data in Firebase
+      const dataRef = ref(db, 'gameChoices/' + timestamp);
+
+      let gameData = { 
+        game: selectedGame,
+        timestamp: new Date(timestamp).toLocaleString("en-US", { timeZone: "Asia/Kuala_Lumpur" })
+      };
+
+      // If the user selects "lain ii", include the input text as well
+      if (selectedGame === 'lainii' && otherGameInput) {
+        gameData.otherGame = otherGameInput;
+      }
+
+      // Save data to Firebase
+      set(dataRef, gameData)
+        .then(() => {
+          alert('Your choice has been submitted!');
+        })
+        .catch((error) => {
+          console.error("Error saving data:", error);
+        });
+    }
+
+    // Event listener for the dropdown change (to show the input field)
+    document.getElementById('gameDropdown').addEventListener('change', function() {
+      const inputContainer = document.getElementById('inputContainer');
+      if (this.value === 'lainii') {
+        inputContainer.style.display = 'block';
+      } else {
+        inputContainer.style.display = 'none';
+      }
+    });
+
+    // Event listener for the submit button
+    document.getElementById('submitButton').addEventListener('click', submitGameChoice);
+  </script>
+</body>
+</html>
