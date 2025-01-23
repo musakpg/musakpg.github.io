@@ -138,9 +138,9 @@
       const malaysiaTime = date.toLocaleString("en-US", { timeZone: "Asia/Kuala_Lumpur" });
 
       // Save answer and time to Firebase
-      const dataRef = ref(db, 'answers/' + timestamp);
+      const dataRef = ref(db, 'wannaKnowSomething/' + timestamp);
       set(dataRef, {
-        answer: answer,
+        wannaKnowSomething: answer,
         time: malaysiaTime
       })
         .then(() => {
@@ -160,7 +160,8 @@
     }
 
     // Event listener for the "Sure what is it?" button
-    document.querySelector('.sure-button').addEventListener('click', () => submitAnswer('sure'));
+    document.querySelector('.sure-button').addEventListener('click', () => submitAnswer('yes'));
+    document.querySelector('.dont-know-button').addEventListener('click', () => submitAnswer('no'));
 
     // Event listener for the "I don't wanna know" button
     document.querySelector('.dont-know-button').addEventListener('click', () => {
