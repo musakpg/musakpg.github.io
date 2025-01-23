@@ -133,7 +133,7 @@
       })
         .then(() => {
           if (answer === 'sure') {
-            // Show the "Sure" modal and disable buttons
+            // Show the "Sure" modal and enable the OK button
             const modal = document.querySelector('.modal');
             const modalButton = document.querySelector('.modal-button');
             
@@ -164,7 +164,8 @@
 
     // Event listener for the modal "OK" button
     document.querySelector('.modal-button').addEventListener('click', () => {
-      const modal = document.querySelector('.modal-sure');
+      const modal = document.querySelector('.modal');
+      modal.style.display = 'none'; // Close the modal
       window.location.href = "example.html";  // Go to the third page
     });
 
@@ -182,19 +183,11 @@
     <button class="sure-button">Sure what is it?</button>
   </div>
 
-  <!-- Custom Modal -->
+  <!-- Custom Modal for the "Sure" button -->
   <div class="modal">
     <div class="modal-content">
-      <h2>Are you sure? :)</h2>
+      <h2>Okay let's go!</h2>  <!-- Custom message for the "Sure" button -->
       <button class="modal-button">OK</button> <!-- OK button for the Sure modal -->
-      <button class="modal-button modal-button-no">NO</button>
-    </div>
-  </div>
-
-  <div class="modal-sure">
-    <div class="modal-content">
-      <h2>Okay let's go!</h2>
-      <button class="modal-button modal-button-no">OK</button>
     </div>
   </div>
 </body>
