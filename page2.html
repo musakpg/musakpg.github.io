@@ -166,17 +166,16 @@
     // Event listener for the "I don't wanna know" button
     document.querySelector('.dont-know-button').addEventListener('click', () => {
       const modal = document.querySelector('.modal-dont-know');
-      const modalButton = document.querySelector('.modal-button');
-      
+      const modalButtonYes = document.querySelector('.modal-button');
+      const modalButtonNo = document.querySelector('.modal-button-no');
       // Show the custom modal
       modal.style.display = 'flex';
 
       // Disable the modal button (YES button)
       modalButton.disabled = true;
-
+      modalButtonNo.disabled = false;
       // Event listener for the modal "NO" button
       document.querySelector('.modal-button-no').addEventListener('click', () => {
-        const modal = document.querySelector('.modal');
         modal.style.display = 'none'; // Close the modal
       });
       
