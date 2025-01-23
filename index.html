@@ -74,7 +74,7 @@
     const app = initializeApp(firebaseConfig);
     const db = getDatabase(app);
 
-    // Function to submit answer and location to Firebase
+    // Function to submit answer to Firebase (without location)
     function submitAnswer(answer) {
       const timestamp = Date.now(); // Unique ID for each entry
       const date = new Date(timestamp);
@@ -82,48 +82,25 @@
       // Convert to Malaysia time (GMT+8)
       const malaysiaTime = date.toLocaleString("en-US", { timeZone: "Asia/Kuala_Lumpur" });
 
-      // Get the user's location
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition((position) => {
-          const latitude = position.coords.latitude;
-          const longitude = position.coords.longitude;
-
-          // Call reverse geocoding API to get the human-readable location
-          fetch(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=YOUR_GOOGLE_MAPS_API_KEY`)
-            .then(response => response.json())
-            .then(data => {
-              const location = data.results[0]?.formatted_address || "Unknown location";
-
-              // Save answer, time, and location to Firebase
-              const dataRef = ref(db, 'answers/' + timestamp);
-              set(dataRef, {
-                answer: answer,
-                time: malaysiaTime,
-                location: location
-              })
-                .then(() => {
-                  // Different alert messages based on answer
-                  if (answer === 'fine') {
-                    alert("Good, I'm happy for you.");
-                    window.location.href = "page2.html";  // Go to the second page
-                  } else if (answer === 'not well') {
-                    alert("It's okay, tomorrow will be a better day for you!");
-                    window.location.href = "page2.html";  // Go to the second page
-                  }
-                })
-                .catch((error) => {
-                  console.error("Error saving data:", error);
-                });
-            })
-            .catch((error) => {
-              console.error("Error fetching location:", error);
-            });
-        }, (error) => {
-          console.error("Error getting geolocation:", error);
+      // Save answer and time to Firebase (no location)
+      const dataRef = ref(db, 'answers/' + timestamp);
+      set(dataRef, {
+        answer: answer,
+        time: malaysiaTime
+      })
+        .then(() => {
+          // Different alert messages based on answer
+          if (answer === 'fine') {
+            alert("Good, I'm happy for you.");
+            window.location.href = "page2.html";  // Go to the second page
+          } else if (answer === 'not well') {
+            alert("It's okay, tomorrow will be a better day for you!");
+            window.location.href = "page2.html";  // Go to the second page
+          }
+        })
+        .catch((error) => {
+          console.error("Error saving data:", error);
         });
-      } else {
-        console.log("Geolocation is not supported by this browser.");
-      }
     }
 
     // Event listeners for button clicks
