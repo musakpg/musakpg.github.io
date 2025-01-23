@@ -81,7 +81,7 @@
       border-radius: 5px;
       cursor: pointer;
       margin-top: 10px;
-      background-color: #dc3545;
+      background-color: #007bff;
       color: #fff;
     }
 
@@ -91,7 +91,7 @@
     }
 
     .modal-button-no {
-      background-color: #007bff;
+      background-color: #dc3545;
     }
 
     button:focus {
@@ -133,8 +133,13 @@
       })
         .then(() => {
           if (answer === 'sure') {
-            alert("Okay let's go.");
-            window.location.href = "example.html";  // Go to the third page
+            // Show the "Sure" modal and disable buttons
+            const modal = document.querySelector('.modal');
+            const modalButton = document.querySelector('.modal-button');
+            
+            // Show the custom modal
+            modal.style.display = 'flex';
+            modalButton.disabled = false;
           }  
         })
         .catch((error) => {
@@ -143,16 +148,7 @@
     }
 
     // Event listener for the "Sure what is it?" button
-    document.querySelector('.sure-button').addEventListener('click', () => {
-      const modal = document.querySelector('.modal');
-      const modalButton = document.querySelector('.modal-button');
-      
-      // Show the custom modal
-      modal.style.display = 'flex';
-
-      // Disable the modal button (YES button)
-      modalButton.disabled = true;
-    });
+    document.querySelector('.sure-button').addEventListener('click', () => submitAnswer('sure'));
 
     // Event listener for the "I don't wanna know" button
     document.querySelector('.dont-know-button').addEventListener('click', () => {
@@ -166,10 +162,11 @@
       modalButton.disabled = true;
     });
 
-    // Event listener for the modal "YES" button
+    // Event listener for the modal "OK" button
     document.querySelector('.modal-button').addEventListener('click', () => {
       const modal = document.querySelector('.modal');
       modal.style.display = 'none'; // Close the modal
+      window.location.href = "example.html";  // Go to the third page
     });
 
     // Event listener for the modal "NO" button
@@ -190,7 +187,7 @@
   <div class="modal">
     <div class="modal-content">
       <h2>Are you sure? :)</h2>
-      <button class="modal-button" disabled>YES</button>
+      <button class="modal-button">OK</button> <!-- OK button for the Sure modal -->
       <button class="modal-button modal-button-no">NO</button>
     </div>
   </div>
