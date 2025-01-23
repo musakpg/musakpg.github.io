@@ -121,9 +121,9 @@
       const malaysiaTime = date.toLocaleString("en-US", { timeZone: "Asia/Kuala_Lumpur" });
 
       // Save answer and time to Firebase (no location)
-      const dataRef = ref(db, 'answers/' + timestamp);
+      const dataRef = ref(db, 'howAreYou/' + timestamp);
       set(dataRef, {
-        answer: answer,
+        howAreYou: answer,
         time: malaysiaTime
       })
         .then(() => {
