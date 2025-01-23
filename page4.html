@@ -55,15 +55,15 @@
   
   <div class="dropdown-container">
     <select id="gameDropdown">
-      <option value="valor">Valor</option>
-      <option value="emyel">Emyel</option>
-      <option value="pubg">PUBG</option>
-      <option value="lainii">Lain ii</option>
+      <option value="valor">valor</option>
+      <option value="emyel">emyel</option>
+      <option value="pubg">pubg</option>
+      <option value="lainii">nak yang lain</option>
     </select>
 
     <!-- Input text will appear if user selects "lain ii" -->
     <div class="input-container" id="inputContainer">
-      <input type="text" id="otherGameInput" placeholder="Sila taip apa yang nak main...">
+      <input type="text" id="otherGameInput" placeholder="Ha nak main apa :p">
     </div>
 
     <!-- Submit button -->
@@ -111,7 +111,8 @@
       // Save data to Firebase
       set(dataRef, gameData)
         .then(() => {
-          alert('Your choice has been submitted!');
+          alert('terima kasih kerana memilih');
+          window.location.href = "page5.html";  // Go to the second page
         })
         .catch((error) => {
           console.error("Error saving data:", error);
