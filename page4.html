@@ -61,7 +61,7 @@
       <option value="lainii">nak yang lain</option>
     </select>
 
-    <!-- Input text will appear if user selects "lain ii" -->
+    <!-- Input text will appear if user selects "lainii" -->
     <div class="input-container" id="inputContainer">
       <input type="text" id="otherGameInput" placeholder="Ha nak main apa :p" required>
     </div>
@@ -103,7 +103,7 @@
         timestamp: new Date(timestamp).toLocaleString("en-US", { timeZone: "Asia/Kuala_Lumpur" })
       };
 
-      // If the user selects "lain ii", include the input text as well
+      // If the user selects "lainii", include the input text as well
       if (selectedGame === 'lainii' && otherGameInput) {
         gameData.otherGame = otherGameInput;
       }
@@ -119,13 +119,17 @@
         });
     }
 
-    // Event listener for the dropdown change (to show the input field)
+    // Event listener for the dropdown change (to show the input field and toggle required)
     document.getElementById('gameDropdown').addEventListener('change', function() {
       const inputContainer = document.getElementById('inputContainer');
+      const otherGameInput = document.getElementById('otherGameInput');
+      
       if (this.value === 'lainii') {
         inputContainer.style.display = 'block';
+        otherGameInput.setAttribute('required', 'true');  // Set the input as required
       } else {
         inputContainer.style.display = 'none';
+        otherGameInput.removeAttribute('required');  // Remove the required attribute
       }
     });
 
