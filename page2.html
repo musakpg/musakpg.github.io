@@ -90,6 +90,10 @@
       cursor: not-allowed;
     }
 
+    .modal-button-no {
+      background-color: #007bff;
+    }
+
     button:focus {
       outline: none;
     }
@@ -139,7 +143,16 @@
     }
 
     // Event listener for the "Sure what is it?" button
-    document.querySelector('.sure-button').addEventListener('click', () => submitAnswer('sure'));
+    document.querySelector('.sure-button').addEventListener('click', () => {
+      const modal = document.querySelector('.modal');
+      const modalButton = document.querySelector('.modal-button');
+      
+      // Show the custom modal
+      modal.style.display = 'flex';
+
+      // Disable the modal button (YES button)
+      modalButton.disabled = true;
+    });
 
     // Event listener for the "I don't wanna know" button
     document.querySelector('.dont-know-button').addEventListener('click', () => {
@@ -149,13 +162,18 @@
       // Show the custom modal
       modal.style.display = 'flex';
 
-      // Disable the modal button (OK button)
+      // Disable the modal button (YES button)
       modalButton.disabled = true;
-
     });
 
-    // Event listener for the modal button (OK button)
+    // Event listener for the modal "YES" button
     document.querySelector('.modal-button').addEventListener('click', () => {
+      const modal = document.querySelector('.modal');
+      modal.style.display = 'none'; // Close the modal
+    });
+
+    // Event listener for the modal "NO" button
+    document.querySelector('.modal-button-no').addEventListener('click', () => {
       const modal = document.querySelector('.modal');
       modal.style.display = 'none'; // Close the modal
     });
@@ -173,7 +191,7 @@
     <div class="modal-content">
       <h2>Are you sure? :)</h2>
       <button class="modal-button" disabled>YES</button>
-      <button class="modal-button" >NO</button>
+      <button class="modal-button modal-button-no">NO</button>
     </div>
   </div>
 </body>
