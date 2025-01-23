@@ -164,8 +164,7 @@
 
     // Event listener for the modal "OK" button
     document.querySelector('.modal-button').addEventListener('click', () => {
-      const modal = document.querySelector('.modal');
-      modal.style.display = 'none'; // Close the modal
+      const modal = document.querySelector('.modal-sure');
       window.location.href = "example.html";  // Go to the third page
     });
 
@@ -189,6 +188,13 @@
       <h2>Are you sure? :)</h2>
       <button class="modal-button">OK</button> <!-- OK button for the Sure modal -->
       <button class="modal-button modal-button-no">NO</button>
+    </div>
+  </div>
+
+  <div class="modal-sure">
+    <div class="modal-content">
+      <h2>Okay let's go!</h2>
+      <button class="modal-button modal-button-no">OK</button>
     </div>
   </div>
 </body>
