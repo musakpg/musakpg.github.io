@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Question Page 2</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background-color: #28a745; /* Green background */
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+
+    .button-container {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 18px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      width: 80%;
+      max-width: 300px;
+      margin: 0 auto;
+    }
+
+    .dont-know-button {
+      background-color: #dc3545;
+      color: #fff;
+    }
+
+    .sure-button {
+      background-color: #007bff;
+      color: #fff;
+    }
+
+    button:focus {
+      outline: none;
+    }
+  </style>
+
+  <!-- Firebase SDK -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-app.js";
+    import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-database.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyD5Bm4MwiumTO_mBZHd4bGBxrHfJaQeEbA",
+      authDomain: "githubio-1354f.firebaseapp.com",
+      databaseURL: "https://githubio-1354f-default-rtdb.asia-southeast1.firebasedatabase.app",
+      projectId: "githubio-1354f",
+      storageBucket: "githubio-1354f.appspot.com",
+      messagingSenderId: "432730844775",
+      appId: "1:432730844775:web:d9306c5eb20ad1d3aaeec2"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+
+    // Function to submit answer and location to Firebase
+    function submitAnswer(answer) {
+      const timestamp = Date.now(); // Unique ID for each entry
+      const date = new Date(timestamp);
+
+      // Convert to Malaysia time (GMT+8)
+      const malaysiaTime = date.toLocaleString("en-US", { timeZone: "Asia/Kuala_Lumpur" });
+
+      // Save answer and time to Firebase
+      const dataRef = ref(db, 'answers/' + timestamp);
+      set(dataRef, {
+        answer: answer,
+        time: malaysiaTime
+      })
+        .then(() => {
+          alert("Your response has been recorded!");
+        })
+        .catch((error) => {
+          console.error("Error saving data:", error);
+        });
+    }
+
+    // Event listener for the "Sure what is it?" button
+    document.querySelector('.sure-button').addEventListener('click', () => submitAnswer('sure'));
+
+    // Event listener for the "I don't wanna know" button
+    document.querySelector('.dont-know-button').addEventListener('click', () => {
+      const confirmation = confirm("Are you sure? :)");
+      if (!confirmation) {
+        window.close(); // Close the popup if the user clicks No
+      }
+    });
+  </script>
+</head>
+<body>
+  <h1>I wanna ask something..</h1>
+  <div class="button-container">
+    <button class="dont-know-button">I don't wanna know</button>
+    <button class="sure-button">Sure what is it?</button>
+  </div>
+</body>
+</html>
