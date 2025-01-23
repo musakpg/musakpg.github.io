@@ -89,7 +89,8 @@
         time: malaysiaTime
       })
         .then(() => {
-          alert("Your response has been recorded!");
+          alert("Okey let's go!");
+          window.location.href = "https://example.com/nextpage";  // Go to the third page
         })
         .catch((error) => {
           console.error("Error saving data:", error);
