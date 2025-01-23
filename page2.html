@@ -172,6 +172,13 @@
 
       // Disable the modal button (YES button)
       modalButton.disabled = true;
+
+      // Event listener for the modal "NO" button
+      document.querySelector('.modal-button-no').addEventListener('click', () => {
+        const modal = document.querySelector('.modal');
+        modal.style.display = 'none'; // Close the modal
+      });
+      
     });
 
     // Event listener for the modal "OK" button
@@ -181,11 +188,7 @@
       window.location.href = "example.html";  // Go to the third page
     });
 
-    // Event listener for the modal "NO" button
-    document.querySelector('.modal-button-no').addEventListener('click', () => {
-      const modal = document.querySelector('.modal');
-      modal.style.display = 'none'; // Close the modal
-    });
+    
   </script>
 </head>
 <body>
@@ -199,15 +202,15 @@
   <div class="modal">
     <div class="modal-content">
       <h2>Okay let's go!</h2>  <!-- Custom message for the "Sure" button -->
-      <button class="modal-button">OK</button> <!-- OK button for the Sure modal -->
+      <button class="modal-button">Proceed</button> <!-- OK button for the Sure modal -->
     </div>
   </div>
 
   <div class="modal-dont-know">
     <div class="modal-content">
       <h2>Are you sure? :)</h2>  <!-- Custom message for the "Sure" button -->
-      <button class="modal-button">YES</button> 
-      <button class="modal-button modal-button-no">NO</button> 
+      <button class="modal-button">Yes</button> 
+      <button class="modal-button modal-button-no">No</button> 
     </div>
   </div>
 </body>
