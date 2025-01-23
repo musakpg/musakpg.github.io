@@ -55,78 +55,46 @@
       outline: none;
     }
   </style>
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/11.2.0/firebase-app.js"></script>
 </head>
 <body>
   <h1>How are you today?</h1>
   <div class="button-container">
-    <button class="fine-button">I'm fine</button>
-    <button class="bad-button">It's bad</button>
+    <button class="fine-button" onclick="submitAnswer('fine')">I'm totally fine.</button>
+    <button class="bad-button" onclick="submitAnswer('not well')">Honestly, not too well.</button>
   </div>
-</body>
-</html>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Question Page</title>
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: Arial, sans-serif;
-      background-color: #28a745; /* Green background */
-      color: #fff;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      text-align: center;
-    }
 
-    h1 {
-      font-size: 24px;
-      margin-bottom: 20px;
-    }
+  <script>
+    // Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyD5Bm4MwiumTO_mBZHd4bGBxrHfJaQeEbA",
+      authDomain: "githubio-1354f.firebaseapp.com",
+      databaseURL: "https://githubio-1354f-default-rtdb.asia-southeast1.firebasedatabase.app/",
+      projectId: "githubio-1354f",
+      storageBucket: "githubio-1354f",
+      messagingSenderId: "432730844775",
+      appId: "1:432730844775:web:d9306c5eb20ad1d3aaeec2"
+    };
 
-    .button-container {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
+    // Initialize Firebase
+    const app = firebase.initializeApp(firebaseConfig);
+    const db = firebase.database();
 
-    button {
-      padding: 10px 20px;
-      font-size: 18px;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      width: 80%;
-      max-width: 300px;
-      margin: 0 auto;
+    // Function to submit answer
+    function submitAnswer(answer) {
+      const timestamp = Date.now(); // Unique ID for each entry
+      firebase.database().ref('answers/' + timestamp).set({
+        answer: answer,
+        time: new Date().toISOString()
+      })
+      .then(() => {
+        alert("Your response has been recorded!");
+      })
+      .catch((error) => {
+        console.error("Error saving data:", error);
+      });
     }
-
-    .fine-button {
-      background-color: #007bff;
-      color: #fff;
-    }
-
-    .bad-button {
-      background-color: #dc3545;
-      color: #fff;
-    }
-
-    button:focus {
-      outline: none;
-    }
-  </style>
-</head>
-<body>
-  <h1>How are you today?</h1>
-  <div class="button-container">
-    <button class="fine-button">I'm fine</button>
-    <button class="bad-button">It's bad</button>
-  </div>
+  </script>
 </body>
 </html>
