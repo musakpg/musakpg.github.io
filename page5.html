@@ -27,79 +27,107 @@
       z-index: 10; /* Ensure text appears above the stars */
     }
 
-    /* Generate a random number of stars */
+    /* Base star styles */
     .star {
       position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
       font-size: 40px;
-      animation: moveAndRotate 5s infinite linear;
+      animation: moveAndRotate 10s infinite linear;
+      color: #FFD700; /* Gold color */
     }
 
     /* Randomized animation for moving and rotating the stars */
     @keyframes moveAndRotate {
       0% {
         transform: translate(-50%, -50%) rotate(0deg);
-        top: 0;
-        left: 0;
+        top: 0%;
+        left: 0%;
+      }
+      25% {
+        transform: translate(-50%, -50%) rotate(90deg);
+        top: 10%;
+        left: 30%;
+      }
+      50% {
+        transform: translate(-50%, -50%) rotate(180deg);
+        top: 50%;
+        left: 70%;
+      }
+      75% {
+        transform: translate(-50%, -50%) rotate(270deg);
+        top: 80%;
+        left: 40%;
       }
       100% {
         transform: translate(-50%, -50%) rotate(360deg);
-        top: 100%;
-        left: 100%;
+        top: 90%;
+        left: 90%;
       }
     }
 
-    /* Randomize the stars' positions, speed, and sizes */
+    /* Adding more randomness using multiple nth-child selectors */
     .star:nth-child(1) {
-      animation-duration: 10s;
-      font-size: 50px;
-      left: 10%;
-      top: 30%;
+      animation-duration: 12s;
+      font-size: 45px;
+      top: 10%;
+      left: 20%;
     }
 
     .star:nth-child(2) {
       animation-duration: 15s;
-      font-size: 40px;
+      font-size: 50px;
+      top: 25%;
       left: 50%;
-      top: 50%;
     }
 
     .star:nth-child(3) {
-      animation-duration: 7s;
+      animation-duration: 8s;
       font-size: 60px;
-      left: 70%;
-      top: 70%;
+      top: 60%;
+      left: 10%;
     }
 
     .star:nth-child(4) {
-      animation-duration: 12s;
-      font-size: 45px;
-      left: 20%;
-      top: 80%;
+      animation-duration: 14s;
+      font-size: 55px;
+      top: 40%;
+      left: 70%;
     }
 
     .star:nth-child(5) {
-      animation-duration: 20s;
+      animation-duration: 18s;
       font-size: 35px;
-      left: 80%;
-      top: 20%;
+      top: 70%;
+      left: 90%;
     }
 
-    /* You can add more stars with the same pattern by copying and changing nth-child index */
+    /* Add more stars by copying the pattern */
   </style>
 </head>
 <body>
-  <h1>Okay dah tujee babai :p</h1>
+  <h1>okay dah tujee babai :p</h1>
 
-  <!-- Multiple stars that rotate and move randomly -->
+  <!-- Multiple stars that move randomly -->
   <div class="star">★</div>
   <div class="star">★</div>
   <div class="star">★</div>
   <div class="star">★</div>
   <div class="star">★</div>
-  <!-- Add more stars if needed by copying the div above -->
+    <div class="star">★</div>
+  <div class="star">★</div>
+  <div class="star">★</div>
+  <div class="star">★</div>
+  <div class="star">★</div>
+    <div class="star">★</div>
+  <div class="star">★</div>
+  <div class="star">★</div>
+  <div class="star">★</div>
+  <div class="star">★</div>
+    <div class="star">★</div>
+  <div class="star">★</div>
+  <div class="star">★</div>
+  <div class="star">★</div>
+  <div class="star">★</div>
+  <!-- Add more stars by copying the div above -->
 
 </body>
 </html>
