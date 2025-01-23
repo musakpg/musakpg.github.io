@@ -97,6 +97,17 @@
       color: #fff;
     }
 
+    .modal-button-ye {
+      padding: 10px 20px;
+      font-size: 18px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 10px;
+      background-color: #007bff;
+      color: #fff;
+    }
+
     .modal-button:disabled {
       background-color: #aaa;
       cursor: not-allowed;
@@ -179,9 +190,9 @@
     document.querySelector('.modal-dont-know').addEventListener('click', () => {
       const modal = document.querySelector('.modal-dont-know');
        let yeeClickCount = 0;
-        
+            
             // Event listener for the "Yee" button
-            document.querySelector('.modal-button').addEventListener('click', () => {
+            document.querySelector('.modal-button-ye').addEventListener('click', () => {
               yeeClickCount++;
               
               // After 3 clicks, show the alert and close the window
@@ -190,6 +201,12 @@
                 window.close();
               }
             });
+    });
+
+     // Event listener for the modal "NO" button
+    document.querySelector('.modal-button-no').addEventListener('click', () => {
+      const modal = document.querySelector('.modal-dont-know');
+      modal.style.display = 'none'; // Close the modal
     });
     
   </script>
@@ -213,7 +230,7 @@
   <div class="modal-dont-know">
     <div class="modal-content">
       <h2>Ye ke nii?</h2>
-      <button class="modal-button">Yee</button>
+      <button class="modal-button-ye">Yee</button>
       <button class="modal-button modal-button-no">Eh nakk</button>
     </div>
   </div>
